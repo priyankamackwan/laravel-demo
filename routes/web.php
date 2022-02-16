@@ -38,6 +38,6 @@ Route::delete('/user-management/{id}',[Userdetails::class,'destroy'])->middlewar
 Route::get('/user-management/{id}',[Userdetails::class,'edit'])->middleware(['auth'])->name('user.edit');
 Route::post('/update/{id}',[Userdetails::class,'update'])->middleware(['auth'])->name('update');
 Route::get('/user-managementa',[Userdetails::class,'create'])->middleware(['auth'])->name('user.create');
-Route::post('/user-management',[Userdetails::class,'store'])->middleware(['auth'])->name('user.store');
+Route::post('/user-managementaa',[Userdetails::class,'store'])->middleware(['auth'])->name('user.store');
 Route::post('/user-management',[Userdetails::class,'changeStatus'])->middleware(['auth'])->name('changeStatus');
 require __DIR__.'/auth.php';
