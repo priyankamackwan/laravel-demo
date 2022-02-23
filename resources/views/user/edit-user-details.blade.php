@@ -26,7 +26,7 @@
                         <nav class="navbar navbar-light bg-light">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{route('dashboard')}}">Dashboard</a>
+                                    <a class="nav-link" href="{{route('user.dashboard')}}">Dashboard</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{route('myAccount')}}">My Account</a>
@@ -65,14 +65,23 @@
                             <tr>
                                 <td width="20%"><strong>Full Name</strong></td>
                                 <td><input type='text' name='name' value='{{Auth::user()->name}}' class="form-control"></td>
+                                @if ($errors->has('name'))
+                                    <span class="text-danger">{{ $errors->first('name') }}</span>
+                                @endif
                             </tr>
                             <tr>
                                 <td><strong>Company Name</strong></td>
                                 <td><input type='text' name='company_name' value='{{Auth::user()->company_name}}' class="form-control"></td>
+                                @if ($errors->has('company_name'))
+                                    <span class="text-danger">{{ $errors->first('company_name') }}</span>
+                                @endif
                             </tr>
                              <tr>
                                 <td><strong>Email</strong></td>
                                 <td><input type='email' name='email' value='{{Auth::user()->email}}' class="form-control"></td>
+                                @if ($errors->has('email'))
+                                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                                @endif
                             </tr>
                             <tr>
                                 <td><strong>Password</strong></td>

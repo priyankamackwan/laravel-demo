@@ -10,12 +10,12 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('signup') }}">
+        <form method="POST" action="{{ route('register') }}">
             @csrf
 
             <!-- Name -->
             <div>
-                <x-label for="name" :value="__('Name')" />
+                <x-label for="name" :value="__('Name  aad')" />
 
                 <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
             </div>
@@ -56,7 +56,7 @@
             <div class="mt-4">
                <div class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
                     <div class="col-md-6">
-                        {!! RecaptchaV3::field('signup') !!}
+                        {!! RecaptchaV3::field('register') !!}
                         @if ($errors->has('g-recaptcha-response'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('g-recaptcha-response') }}</strong>

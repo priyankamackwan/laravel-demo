@@ -1,7 +1,16 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Userdetails;
+use App\Http\Controllers\Admin\Auth\AdminloginController;
+use App\Http\Controllers\Admin\BaseController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\ConfirmablePasswordController;
+use App\Http\Controllers\Auth\EmailVerificationNotificationController;
+use App\Http\Controllers\Auth\EmailVerificationPromptController;
+use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\VerifyEmailController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,32 +21,42 @@ use App\Http\Controllers\Userdetails;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Auth::user();
 Route::get('/', function () {
-    return view('welcome');
+    if (Auth::guest()) {   //but here it will work
+        return view('welcome');
+    } else {
+        if(Auth::user()->role_id==1) {
+            return redirect('admin/dashboard');
+        }else if(Auth::user()->role_id==2) {
+            return redirect('dashboard');
+        } 
+    }
 });
 
+Route::get('/admin',[AdminloginController::class,'index'])->name('admin');
+Route::post('/admin',[AdminloginController::class,'store']);
 
+Route::middleware(['user'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('user.dashboard');
+    })->middleware(['auth'])->name('user.dashboard'); 
+    Route::get('/myAccount',[Userdetails::class,'myAccount'])->middleware(['auth'])->name('myAccount');
+    Route::get('/editAccount',[Userdetails::class,'editAccount'])->middleware(['auth'])->name('editAccount');
+    Route::post('updateUser/{id}',[Userdetails::class,'updateUser'])->middleware(['auth'])->name('updateUser');
+});
 
-// User login
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::group(['prefix' => 'admin'], function () {
+    Route::middleware(['admin'])->group(function () {
+        Route::get('/dashboard', function () {
+            return view('admin.admin-dashboard');
+        })->name('admin-dashboard'); 
+        Route::resource('/users',BaseController::class);
+        Route::post('changeStatus',[BaseController::class,'changeStatus'])->name('changeStatus');
+    });
+});
 
-Route::get('/myAccount',[Userdetails::class,'myAccount'])->middleware(['auth'])->name('myAccount');
-Route::get('/editAccount',[Userdetails::class,'editAccount'])->middleware(['auth'])->name('editAccount');
-Route::post('/updateUser/{id}',[Userdetails::class,'updateUser'])->middleware(['auth'])->name('updateUser');
-
-// Admin login
-Route::get('/admin-dashboard', function () {
-    return view('admin-dashboard');
-})->middleware(['auth'])->name('admin-dashboard');
-
-Route::get('/user-management',[Userdetails::class,'userManagement'])->middleware(['auth'])->name('user-management');
-Route::delete('/user-management/{id}',[Userdetails::class,'destroy'])->middleware(['auth'])->name('user.destroy');
-Route::get('/user-management/{id}',[Userdetails::class,'edit'])->middleware(['auth'])->name('user.edit');
-Route::post('/update/{id}',[Userdetails::class,'update'])->middleware(['auth'])->name('update');
-Route::get('/user-managementa',[Userdetails::class,'create'])->middleware(['auth'])->name('user.create');
-Route::post('/user-managementaa',[Userdetails::class,'store'])->middleware(['auth'])->name('user.store');
-Route::post('/user-management',[Userdetails::class,'changeStatus'])->middleware(['auth'])->name('changeStatus');
 require __DIR__.'/auth.php';
+
+
+

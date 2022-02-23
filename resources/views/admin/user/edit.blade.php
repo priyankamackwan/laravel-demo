@@ -21,10 +21,10 @@
                                     <a class="nav-link" href="{{route('admin-dashboard')}}">Dashboard</a>
                                 </li>
                                 <li class="nav-item has-submenu">
-                                    <a class="nav-link active" href="{{route('user-management')}}">User Management</a>
+                                    <a class="nav-link active" href="{{route('users.index')}}">User Management</a>
                                     <ul class="submenu">
-                                        <li style="padding-left:15px;"><a class="nav-link" href="{{route('user.create')}}">Add</a></li>
-                                        <li style="padding-left:15px;"><a class="nav-link" href="{{route('user-management')}}">User List</a></li>
+                                        <li style="padding-left:15px;"><a class="nav-link" href="{{route('users.create')}}">Add</a></li>
+                                        <li style="padding-left:15px;"><a class="nav-link" href="{{route('users.index')}}">User List</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -36,20 +36,30 @@
                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
                         <h2>Edit User</h2>
-                        <form action="{{route('update',$user->id)}}" method="post">
+                        <form action="{{route('users.update',$user->id)}}" method="post">
                           @csrf
+                          @method('PUT')
                           <table class="table table-borderless">
                             <tr>
                                 <td width="20%"><strong>Full Name</strong></td>
                                 <td><input type='text' name='name' value='{{$user->name}}' class="form-control"></td>
+                                @if ($errors->has('name'))
+                                    <span class="text-danger">{{ $errors->first('name') }}</span>
+                                @endif
                             </tr>
                             <tr>
                                 <td><strong>Company Name</strong></td>
                                 <td><input type='text' name='company_name' value='{{$user->company_name}}' class="form-control"></td>
+                                @if ($errors->has('company_name'))
+                                    <span class="text-danger">{{ $errors->first('company_name') }}</span>
+                                @endif
                             </tr>
                              <tr>
                                 <td><strong>Email</strong></td>
                                 <td><input type='email' name='email' value='{{$user->email}}' class="form-control"></td>
+                                @if ($errors->has('email'))
+                                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                                @endif
                             </tr>
                             <tr>
                                 <td><strong>Password</strong></td>

@@ -24,10 +24,10 @@
                                     <a class="nav-link" href="{{route('admin-dashboard')}}">Dashboard</a>
                                 </li>
                                 <li class="nav-item has-submenu active">
-                                    <a class="nav-link" href="{{route('user-management')}}">User Management</a>
+                                    <a class="nav-link" href="{{route('users.index')}}">User Management</a>
                                     <ul class="submenu">
-                                        <li style="padding-left:15px;"><a class="nav-link" href="{{route('user.create')}}">Add</a></li>
-                                        <li style="padding-left:15px;"><a class="nav-link" href="{{route('user-management')}}">User List</a></li>
+                                        <li style="padding-left:15px;"><a class="nav-link" href="{{route('users.create')}}">Add</a></li>
+                                        <li style="padding-left:15px;"><a class="nav-link" href="{{route('users.index')}}">User List</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -59,10 +59,10 @@
                                 <td>{{$row->company_name}}</td>
                                 <td>{{$row->email}}</td>
                                 <td><input data-id="{{$row->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Deactive" {{ $row->status ? 'checked' : '' }}></td>
-                                <td><a href="{{route('user.edit',$row->id)}}" class="btn btn-primary">Edit</a>&nbsp;<form action="{{ route('user.destroy',$row->id) }}" method="post">
+                                <td><a href="{{route('users.edit',$row->id)}}" class="btn btn-primary">Edit</a>&nbsp;<form action="{{ route('users.destroy',$row->id) }}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure delete record?');">Delete</button>
                                     </td>
                                 </form>
                             </tr>

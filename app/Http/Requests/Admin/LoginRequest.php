@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Auth;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
@@ -45,7 +45,7 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt(array_merge($this->only('email', 'password'), ['status' => '1' ,'role_id' => 2]), $this->filled('remember'))) {
+        if (! Auth::attempt(array_merge($this->only('email', 'password'), ['status' => '1' ,'role_id' => 1]), $this->filled('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([

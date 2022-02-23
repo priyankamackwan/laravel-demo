@@ -18,7 +18,7 @@
                         <nav class="navbar navbar-light bg-light">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="{{route('dashboard')}}">Dashboard</a>
+                                    <a class="nav-link active" href="{{route('user.dashboard')}}">Dashboard</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{route('myAccount')}}">My Account</a>

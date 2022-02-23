@@ -21,10 +21,10 @@
                                     <a class="nav-link active" href="{{route('admin-dashboard')}}">Dashboard</a>
                                 </li>
                                 <li class="nav-item has-submenu">
-                                    <a class="nav-link" href="{{route('user-management')}}">User management</a>
+                                    <a class="nav-link" href="{{route('users.index')}}">User management</a>
                                     <ul class="submenu">
-                                        <li style="padding-left:15px;"><a class="nav-link" href="{{route('user.create')}}">Add</a></li>
-                                        <li style="padding-left:15px;"><a class="nav-link" href="{{route('user-management')}}">User List</a></li>
+                                        <li style="padding-left:15px;"><a class="nav-link" href="{{route('users.create')}}">Add</a></li>
+                                        <li style="padding-left:15px;"><a class="nav-link" href="{{route('users.index')}}">User List</a></li>
                                     </ul>
                                 </li>
                             </ul>
