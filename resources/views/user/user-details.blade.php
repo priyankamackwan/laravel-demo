@@ -29,10 +29,20 @@
                                     <a class="nav-link" href="{{route('user.dashboard')}}">Dashboard</a>
                                 </li>
                                 <li class="nav-item">
+                                    <a class="nav-link" href="{{route('project.index')}}">Manange Project</a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link active" href="{{route('myAccount')}}">My Account</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{route('editAccount')}}">Edit Account</a>
+                                </li>
+                                <li class="nav-item has-submenu active">
+                                    <a class="nav-link" href="{{route('task.index')}}">Task Management</a>
+                                    <ul class="submenu">
+                                        <li style="padding-left:15px;"><a class="nav-link" href="{{route('task.create')}}">Add</a></li>
+                                        <li style="padding-left:15px;"><a class="nav-link" href="{{route('task.index')}}">Task Management</a></li>
+                                    </ul>
                                 </li>
                             </ul>
                         </nav>

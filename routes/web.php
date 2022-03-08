@@ -11,6 +11,9 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\AssignProjectController;
+use App\Http\Controllers\TaskController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,6 +47,7 @@ Route::middleware(['user'])->group(function () {
     Route::get('/myAccount',[Userdetails::class,'myAccount'])->middleware(['auth'])->name('myAccount');
     Route::get('/editAccount',[Userdetails::class,'editAccount'])->middleware(['auth'])->name('editAccount');
     Route::post('updateUser/{id}',[Userdetails::class,'updateUser'])->middleware(['auth'])->name('updateUser');
+    Route::resource('/task',TaskController::class);
 });
 
 Route::group(['prefix' => 'admin'], function () {
@@ -53,6 +57,9 @@ Route::group(['prefix' => 'admin'], function () {
         })->name('admin-dashboard'); 
         Route::resource('/users',BaseController::class);
         Route::post('changeStatus',[BaseController::class,'changeStatus'])->name('changeStatus');
+        Route::resource('/project',ProjectController::class);
+        Route::get('/assign-project',[AssignProjectController::class,'assign_project'])->name('assign_project');
+        Route::post('/assign-project/store',[AssignProjectController::class,'store'])->name('assign_project.store');
     });
 });
 

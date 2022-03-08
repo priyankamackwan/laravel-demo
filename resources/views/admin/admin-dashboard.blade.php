@@ -27,6 +27,12 @@
                                         <li style="padding-left:15px;"><a class="nav-link" href="{{route('users.index')}}">User List</a></li>
                                     </ul>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('project.index')}}">Manange Project</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('assign_project')}}">Assign Project</a>
+                                </li>
                             </ul>
                         </nav>
                     </div>

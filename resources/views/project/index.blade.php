@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Admin Dashboard') }}
+            {{ __('Dashboard') }}
         </h2>
     </x-slot>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -21,10 +21,10 @@
                         <nav class="navbar navbar-light bg-light">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{route('admin-dashboard')}}">Dashboard</a>
+                                    <a class="nav-link active" href="{{route('admin-dashboard')}}">Dashboard</a>
                                 </li>
-                                <li class="nav-item has-submenu active">
-                                    <a class="nav-link" href="{{route('users.index')}}">User Management</a>
+                                <li class="nav-item has-submenu">
+                                    <a class="nav-link" href="{{route('users.index')}}">User management</a>
                                     <ul class="submenu">
                                         <li style="padding-left:15px;"><a class="nav-link" href="{{route('users.create')}}">Add</a></li>
                                         <li style="padding-left:15px;"><a class="nav-link" href="{{route('users.index')}}">User List</a></li>
@@ -35,13 +35,6 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{route('assign_project')}}">Assign Project</a>
-                                </li>
-                                <li class="nav-item has-submenu active">
-                                    <a class="nav-link" href="{{route('task.index')}}">Task Management</a>
-                                    <ul class="submenu">
-                                        <li style="padding-left:15px;"><a class="nav-link" href="{{route('task.create')}}">Add</a></li>
-                                        <li style="padding-left:15px;"><a class="nav-link" href="{{route('task.index')}}">Task Management</a></li>
-                                    </ul>
                                 </li>
                             </ul>
                         </nav>
@@ -56,23 +49,20 @@
                 </div>
                 @endif
                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <a class="btn btn-primary" href="{{route('project.create')}}" style="float: right;margin-top: 12px;">Add Project</a>
                     <div class="p-6 bg-white border-b border-gray-200">
-                        <h2>User Management</h2>
+                        <h2>Project Management</h2>
                         <table class="table table-bordered table-responsive-lg">
                             <tr>
                                 <th>Name</th>
-                                <th>Company Name</th>
-                                <th>Email</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
-                            @foreach($user as $row)
+                            @foreach($project as $row)
                             <tr>
-                                <td>{{$row->name}}</td>
-                                <td>{{$row->company_name}}</td>
-                                <td>{{$row->email}}</td>
+                                <td>{{$row->project_name}}</td>
                                 <td><input data-id="{{$row->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Deactive" {{ $row->status ? 'checked' : '' }}></td>
-                                <td><a href="{{route('users.edit',$row->id)}}" class="btn btn-primary">Edit</a>&nbsp;<form action="{{ route('users.destroy',$row->id) }}" method="post">
+                                <td><a href="{{route('project.edit',$row->id)}}" class="btn btn-primary">Edit</a>&nbsp;<form action="{{ route('project.destroy',$row->id) }}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure delete record?');">Delete</button>

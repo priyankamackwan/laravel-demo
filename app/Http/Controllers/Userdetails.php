@@ -20,7 +20,7 @@ class Userdetails extends Controller {
 
     public function updateUser(Request $request,$id) {
         
-         $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(),[
             'name' => 'required',
             'email' => 'required|string|email|max:255|unique:users,email,'.$id,
         ]);
