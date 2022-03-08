@@ -73,7 +73,8 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-        //
+        $task = Taskmanagement::with('taskProject','user')->where('project_id',2)->get();
+        return view('task-management.show',compact('task'));
     }
 
     /**
@@ -83,8 +84,12 @@ class TaskController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
+    {   
+        $taskmanagement = Taskmanagement::find($id);
+        $project = Project::all();
+        $user = User::all();
+        $status = array('Open','In Progress','Testing','Completed');
+        return view('task-management.edit',compact('project','user','status','taskmanagement'));
     }
 
     /**
@@ -107,6 +112,7 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $res=Taskmanagement::where('id',$id)->delete();
+        return redirect()->back();
     }
 }

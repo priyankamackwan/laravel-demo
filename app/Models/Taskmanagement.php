@@ -20,5 +20,11 @@ class Taskmanagement extends Model
         'assign_id'
     ];
 
-    
+    public function taskProject() {
+        return $this->belongsTo(Project::class,'project_id');
+    }
+
+    public function user() {
+        return $this->hasMany(User::class,'id');
+    }  
 }
