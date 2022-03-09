@@ -9,6 +9,7 @@ use App\Models\Project;
 use App\Models\Taskmanagement;
 use Auth;
 use Illuminate\Support\Facades\Validator; 
+use DB;
 
 class TaskController extends Controller
 {
@@ -73,8 +74,12 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-        $task = Taskmanagement::with('taskProject','user')->where('project_id',2)->get();
-        return view('task-management.show',compact('task'));
+        $userget = Taskmanagement::find($id); 
+        $users = DB::table('users')
+                    ->whereIn('id', explode(',',$userget->assign_id))
+                    ->get();
+        $task = Taskmanagement::with('taskProject','user')->where('project_id',$id)->get();
+        return view('task-management.show',compact('task','users'));
     }
 
     /**

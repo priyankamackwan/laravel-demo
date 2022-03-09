@@ -75,7 +75,11 @@
                                 <td>{{$row->start_date}}</td>
                                 <td>{{$row->end_date}}</td>
                                 <td>{{$row->estimate_hours}}</td>
-                                <td>{{$row->assign_id}}</td>
+                                <td>
+                                    @foreach($users as $val)
+                                        {{$val->name}},
+                                    @endforeach
+                                </td>
                                 <td>{{$row->status}}</td>
                                 <td><a href="{{route('task.edit',$row->id)}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>&nbsp;
                                     <form action="{{ route('task.destroy',$row->id) }}" method="post">
